@@ -58,8 +58,11 @@ public partial class ProfilesView
             this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerXrayRoundRobinCmd, v => v.menuGenGroupMultipleServerXrayRoundRobin).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerXrayLeastPingCmd, v => v.menuGenGroupMultipleServerXrayLeastPing).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerXrayLeastLoadCmd, v => v.menuGenGroupMultipleServerXrayLeastLoad).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerXrayFallbackCmd, v => v.menuGenGroupMultipleServerXrayFallback).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerXrayConnectionBasedCmd, v => v.menuGenGroupMultipleServerXrayConnectionBased).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerSingBoxLeastPingCmd, v => v.menuGenGroupMultipleServerSingBoxLeastPing).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerSingBoxFallbackCmd, v => v.menuGenGroupMultipleServerSingBoxFallback).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.GenGroupMultipleServerSingBoxConnectionBasedCmd, v => v.menuGenGroupMultipleServerSingBoxConnectionBased).DisposeWith(disposables);
 
             //servers move
             this.OneWayBind(ViewModel, vm => vm.SubItems, v => v.cmbMoveToGroup.ItemsSource).DisposeWith(disposables);

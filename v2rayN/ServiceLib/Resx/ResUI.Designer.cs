@@ -1078,6 +1078,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Connection Based by sing-box 的本地化字符串。
+        /// </summary>
+        public static string menuGenGroupMultipleServerSingBoxConnectionBased {
+            get {
+                return ResourceManager.GetString("menuGenGroupMultipleServerSingBoxConnectionBased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 LeastPing by sing-box 的本地化字符串。
         /// </summary>
         public static string menuGenGroupMultipleServerSingBoxLeastPing {
@@ -1092,6 +1101,15 @@ namespace ServiceLib.Resx {
         public static string menuGenGroupMultipleServerXrayFallback {
             get {
                 return ResourceManager.GetString("menuGenGroupMultipleServerXrayFallback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Connection Based by Xray 的本地化字符串。
+        /// </summary>
+        public static string menuGenGroupMultipleServerXrayConnectionBased {
+            get {
+                return ResourceManager.GetString("menuGenGroupMultipleServerXrayConnectionBased", resourceCulture);
             }
         }
         
@@ -2895,6 +2913,15 @@ namespace ServiceLib.Resx {
         public static string TbFallback {
             get {
                 return ResourceManager.GetString("TbFallback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Connection Based 的本地化字符串。
+        /// </summary>
+        public static string TbConnectionBased {
+            get {
+                return ResourceManager.GetString("TbConnectionBased", resourceCulture);
             }
         }
         

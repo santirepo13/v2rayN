@@ -28,6 +28,7 @@ public partial class AddGroupServerWindow : WindowBase<AddGroupServerViewModel>
             ResUI.TbRandom,
             ResUI.TbRoundRobin,
             ResUI.TbLeastLoad,
+            ResUI.TbConnectionBased,
         };
 
         switch (profileItem.ConfigType)

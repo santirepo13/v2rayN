@@ -37,7 +37,7 @@ public partial class CoreConfigV2rayService
         }
 
         // Case 3: need to create or insert based on multipleLoad type
-        if (multipleLoad is EMultipleLoad.LeastLoad or EMultipleLoad.Fallback)
+        if (multipleLoad is EMultipleLoad.LeastLoad or EMultipleLoad.Fallback or EMultipleLoad.ConnectionBased)
         {
             if (v2rayConfig.burstObservatory is null)
             {
@@ -91,6 +91,7 @@ public partial class CoreConfigV2rayService
             EMultipleLoad.RoundRobin => "roundRobin",
             EMultipleLoad.LeastPing => "leastPing",
             EMultipleLoad.LeastLoad => "leastLoad",
+            EMultipleLoad.ConnectionBased => "random",
             _ => "roundRobin",
         };
         var balancerTag = $"{selector}{Global.BalancerTagSuffix}";

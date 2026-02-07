@@ -48,8 +48,10 @@ public class ProfilesViewModel : MyReactiveObject
     public ReactiveCommand<Unit, Unit> GenGroupMultipleServerXrayLeastPingCmd { get; }
     public ReactiveCommand<Unit, Unit> GenGroupMultipleServerXrayLeastLoadCmd { get; }
     public ReactiveCommand<Unit, Unit> GenGroupMultipleServerXrayFallbackCmd { get; }
+    public ReactiveCommand<Unit, Unit> GenGroupMultipleServerXrayConnectionBasedCmd { get; }
     public ReactiveCommand<Unit, Unit> GenGroupMultipleServerSingBoxLeastPingCmd { get; }
     public ReactiveCommand<Unit, Unit> GenGroupMultipleServerSingBoxFallbackCmd { get; }
+    public ReactiveCommand<Unit, Unit> GenGroupMultipleServerSingBoxConnectionBasedCmd { get; }
 
     //servers move
     public ReactiveCommand<Unit, Unit> MoveTopCmd { get; }
@@ -154,6 +156,10 @@ public class ProfilesViewModel : MyReactiveObject
         {
             await GenGroupMultipleServer(ECoreType.Xray, EMultipleLoad.Fallback);
         }, canEditRemove);
+        GenGroupMultipleServerXrayConnectionBasedCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            await GenGroupMultipleServer(ECoreType.Xray, EMultipleLoad.ConnectionBased);
+        }, canEditRemove);
         GenGroupMultipleServerSingBoxLeastPingCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await GenGroupMultipleServer(ECoreType.sing_box, EMultipleLoad.LeastPing);
@@ -161,6 +167,10 @@ public class ProfilesViewModel : MyReactiveObject
         GenGroupMultipleServerSingBoxFallbackCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await GenGroupMultipleServer(ECoreType.sing_box, EMultipleLoad.Fallback);
+        }, canEditRemove);
+        GenGroupMultipleServerSingBoxConnectionBasedCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            await GenGroupMultipleServer(ECoreType.sing_box, EMultipleLoad.ConnectionBased);
         }, canEditRemove);
 
         //servers move
