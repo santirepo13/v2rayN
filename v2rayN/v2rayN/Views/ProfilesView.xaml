@@ -257,6 +257,14 @@
                                 x:Name="menuGenGroupMultipleServerXrayLeastLoad"
                                 Height="{StaticResource MenuItemHeight}"
                                 Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayLeastLoad}" />
+                            <MenuItem
+                                x:Name="menuGenGroupMultipleServerXrayFallback"
+                                Height="{StaticResource MenuItemHeight}"
+                                Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayFallback}" />
+                            <MenuItem
+                                x:Name="menuGenGroupMultipleServerXrayConnectionBased"
+                                Height="{StaticResource MenuItemHeight}"
+                                Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayConnectionBased}" />
                             <Separator />
                             <MenuItem
                                 x:Name="menuGenGroupMultipleServerSingBoxLeastPing"
@@ -266,6 +274,10 @@
                                 x:Name="menuGenGroupMultipleServerSingBoxFallback"
                                 Height="{StaticResource MenuItemHeight}"
                                 Header="{x:Static resx:ResUI.menuGenGroupMultipleServerSingBoxFallback}" />
+                            <MenuItem
+                                x:Name="menuGenGroupMultipleServerSingBoxConnectionBased"
+                                Height="{StaticResource MenuItemHeight}"
+                                Header="{x:Static resx:ResUI.menuGenGroupMultipleServerSingBoxConnectionBased}" />
                         </MenuItem>
                     </ContextMenu>
                 </DataGrid.ContextMenu>

@@ -1187,6 +1187,7 @@ public static class ConfigHandler
                 EMultipleLoad.Random => ResUI.menuGenGroupMultipleServerXrayRandom,
                 EMultipleLoad.RoundRobin => ResUI.menuGenGroupMultipleServerXrayRoundRobin,
                 EMultipleLoad.LeastLoad => ResUI.menuGenGroupMultipleServerXrayLeastLoad,
+                EMultipleLoad.ConnectionBased => ResUI.menuGenGroupMultipleServerXrayConnectionBased,
                 _ => ResUI.menuGenGroupMultipleServerXrayRoundRobin,
             };
         }
@@ -1196,6 +1197,7 @@ public static class ConfigHandler
             {
                 EMultipleLoad.LeastPing => ResUI.menuGenGroupMultipleServerSingBoxLeastPing,
                 EMultipleLoad.Fallback => ResUI.menuGenGroupMultipleServerSingBoxFallback,
+                EMultipleLoad.ConnectionBased => ResUI.menuGenGroupMultipleServerSingBoxConnectionBased,
                 _ => ResUI.menuGenGroupMultipleServerSingBoxLeastPing,
             };
         }

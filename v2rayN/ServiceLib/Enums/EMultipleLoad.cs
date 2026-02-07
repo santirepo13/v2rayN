@@ -6,5 +6,6 @@ public enum EMultipleLoad
     Fallback,
     Random,
     RoundRobin,
-    LeastLoad
+    LeastLoad,
+    ConnectionBased
 }

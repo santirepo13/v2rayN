@@ -1539,8 +1539,17 @@
   <data name="TbFallback" xml:space="preserve">
     <value>Fallback</value>
   </data>
+  <data name="TbConnectionBased" xml:space="preserve">
+    <value>Connection Based</value>
+  </data>
   <data name="menuGenGroupMultipleServerSingBoxFallback" xml:space="preserve">
     <value>Fallback by sing-box</value>
+  </data>
+  <data name="menuGenGroupMultipleServerXrayConnectionBased" xml:space="preserve">
+    <value>Connection Based by Xray</value>
+  </data>
+  <data name="menuGenGroupMultipleServerSingBoxConnectionBased" xml:space="preserve">
+    <value>Connection Based by sing-box</value>
   </data>
   <data name="menuGenGroupMultipleServerXrayFallback" xml:space="preserve">
     <value>Fallback by Xray</value>

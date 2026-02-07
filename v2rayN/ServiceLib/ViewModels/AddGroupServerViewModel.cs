@@ -89,6 +89,7 @@ public class AddGroupServerViewModel : MyReactiveObject
             EMultipleLoad.Random => ResUI.TbRandom,
             EMultipleLoad.RoundRobin => ResUI.TbRoundRobin,
             EMultipleLoad.LeastLoad => ResUI.TbLeastLoad,
+            EMultipleLoad.ConnectionBased => ResUI.TbConnectionBased,
             _ => ResUI.TbLeastPing,
         };
 
@@ -197,6 +198,7 @@ public class AddGroupServerViewModel : MyReactiveObject
                 var s when s == ResUI.TbRandom => EMultipleLoad.Random,
                 var s when s == ResUI.TbRoundRobin => EMultipleLoad.RoundRobin,
                 var s when s == ResUI.TbLeastLoad => EMultipleLoad.LeastLoad,
+                var s when s == ResUI.TbConnectionBased => EMultipleLoad.ConnectionBased,
                 _ => EMultipleLoad.LeastPing,
             },
             SubChildItems = SelectedSubItem?.Id,

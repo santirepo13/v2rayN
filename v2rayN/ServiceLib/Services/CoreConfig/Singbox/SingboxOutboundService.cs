@@ -699,35 +699,58 @@ public partial class CoreConfigSingboxService
                 }
             }
 
-            // Add urltest outbound (auto selection based on latency)
+            // Build group selector(s)
             if (proxyTags.Count > 0)
             {
-                var outUrltest = new Outbound4Sbox
+                if (multipleLoad == EMultipleLoad.ConnectionBased)
                 {
-                    type = "urltest",
-                    tag = $"{baseTagName}-auto",
-                    outbounds = proxyTags,
-                    interrupt_exist_connections = false,
-                };
+                    // Persistent, per-target proxy pinning: choose a stable default and avoid auto urltest churn
+                    var selected = PersistentProxyService.Instance.GetOrAssign(baseTagName, proxyTags);
+                    var ordered = JsonUtils.DeepCopy(proxyTags);
+                    if (!selected.IsNullOrEmpty())
+                    {
+                        ordered.Remove(selected);
+                        ordered.Insert(0, selected);
+                    }
 
-                if (multipleLoad == EMultipleLoad.Fallback)
-                {
-                    outUrltest.tolerance = 5000;
+                    var outSelector = new Outbound4Sbox
+                    {
+                        type = "selector",
+                        tag = baseTagName,
+                        outbounds = ordered,
+                        interrupt_exist_connections = false,
+                    };
+
+                    resultOutbounds.Insert(0, outSelector);
                 }
-
-                // Add selector outbound (manual selection)
-                var outSelector = new Outbound4Sbox
+                else
                 {
-                    type = "selector",
-                    tag = baseTagName,
-                    outbounds = JsonUtils.DeepCopy(proxyTags),
-                    interrupt_exist_connections = false,
-                };
-                outSelector.outbounds.Insert(0, outUrltest.tag);
+                    // Default behavior: urltest + selector
+                    var outUrltest = new Outbound4Sbox
+                    {
+                        type = "urltest",
+                        tag = $"{baseTagName}-auto",
+                        outbounds = proxyTags,
+                        interrupt_exist_connections = false,
+                    };
 
-                // Insert these at the beginning
-                resultOutbounds.Insert(0, outUrltest);
-                resultOutbounds.Insert(0, outSelector);
+                    if (multipleLoad == EMultipleLoad.Fallback)
+                    {
+                        outUrltest.tolerance = 5000;
+                    }
+
+                    var outSelector = new Outbound4Sbox
+                    {
+                        type = "selector",
+                        tag = baseTagName,
+                        outbounds = JsonUtils.DeepCopy(proxyTags),
+                        interrupt_exist_connections = false,
+                    };
+                    outSelector.outbounds.Insert(0, outUrltest.tag);
+
+                    resultOutbounds.Insert(0, outUrltest);
+                    resultOutbounds.Insert(0, outSelector);
+                }
             }
 
             // Merge results: first the selector/urltest/proxies, then other outbounds, and finally prev outbounds
@@ -828,32 +851,53 @@ public partial class CoreConfigSingboxService
             }
             proxyTags.Add(server.tag);
         }
-        // Add urltest outbound (auto selection based on latency)
+        // Build group selector(s)
         if (proxyTags.Count > 0)
         {
-            var outUrltest = new Outbound4Sbox
+            if (multipleLoad == EMultipleLoad.ConnectionBased)
             {
-                type = "urltest",
-                tag = $"{baseTagName}-auto",
-                outbounds = proxyTags,
-                interrupt_exist_connections = false,
-            };
-            if (multipleLoad == EMultipleLoad.Fallback)
-            {
-                outUrltest.tolerance = 5000;
+                // Persistent, per-target proxy pinning
+                var selected = PersistentProxyService.Instance.GetOrAssign(baseTagName, proxyTags);
+                var ordered = JsonUtils.DeepCopy(proxyTags);
+                if (!selected.IsNullOrEmpty())
+                {
+                    ordered.Remove(selected);
+                    ordered.Insert(0, selected);
+                }
+
+                var outSelector = new Outbound4Sbox
+                {
+                    type = "selector",
+                    tag = baseTagName,
+                    outbounds = ordered,
+                    interrupt_exist_connections = false,
+                };
+                resultOutbounds.Insert(0, outSelector);
             }
-            // Add selector outbound (manual selection)
-            var outSelector = new Outbound4Sbox
+            else
             {
-                type = "selector",
-                tag = baseTagName,
-                outbounds = JsonUtils.DeepCopy(proxyTags),
-                interrupt_exist_connections = false,
-            };
-            outSelector.outbounds.Insert(0, outUrltest.tag);
-            // Insert these at the beginning
-            resultOutbounds.Insert(0, outUrltest);
-            resultOutbounds.Insert(0, outSelector);
+                var outUrltest = new Outbound4Sbox
+                {
+                    type = "urltest",
+                    tag = $"{baseTagName}-auto",
+                    outbounds = proxyTags,
+                    interrupt_exist_connections = false,
+                };
+                if (multipleLoad == EMultipleLoad.Fallback)
+                {
+                    outUrltest.tolerance = 5000;
+                }
+                var outSelector = new Outbound4Sbox
+                {
+                    type = "selector",
+                    tag = baseTagName,
+                    outbounds = JsonUtils.DeepCopy(proxyTags),
+                    interrupt_exist_connections = false,
+                };
+                outSelector.outbounds.Insert(0, outUrltest.tag);
+                resultOutbounds.Insert(0, outUrltest);
+                resultOutbounds.Insert(0, outSelector);
+            }
         }
         var serverList = new List<BaseServer4Sbox>();
         serverList = serverList.Concat(resultOutbounds)
